@@ -1,0 +1,123 @@
+﻿@model CloudWebService.Models.SelectDeviceData
+
+@{
+    ViewData["Title"] = "Select Device";
+}
+<h1>
+    Displaying Data for Device <br>
+    ID : @Model.Device.Adress.ToString()<br>
+    Alias : @Model.Device.Alias.ToString()
+
+</h1>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
+
+
+<div class="container-fluid lead">
+    <div class="row">
+        <div class="col">
+          <canvas id="line-chart" width="800" height="450"></canvas>
+        </div>
+
+    </div>
+    <div class = "row">
+        <div class="col">
+          <canvas id="bar-price-chart" width="200" height="200" ></canvas>
+        </div>
+        <div class = "col">
+          <canvas id="bar-energy-chart" width="200" height="200" ></canvas>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+
+
+var timeArray = [];
+var priceArray = [];
+var barPrice = 0.0;
+var barEnergy = 0.0;
+
+processData();
+
+generateLineChart();
+generateBarCharts();
+
+function processData() {
+            @foreach (var item in Model.datas)
+            {
+
+                <text>
+                    timeArray.push('@item.time_stamp');
+                    priceArray.push(parseFloat('@item.measurement'.replace(/,/, '.')).toFixed(2));
+                    barPrice += parseFloat('@item.measurement'.replace(/,/, '.')).toFixed(2) * parseFloat('@item.price'.replace(/,/, '.')).toFixed(2);
+                    barEnergy += parseFloat('@item.measurement'.replace(/,/, '.')).toFixed(2) * 1.0;
+                </text>
+            }
+    }
+
+function generateLineChart() {
+         new Chart(document.getElementById("line-chart"), {
+              type: 'line',
+              data: {
+                labels: timeArray,
+                datasets: [{ 
+                    data:  priceArray,
+                    label: "kWh",
+                    borderColor: "#3e95cd",
+                    fill: true
+                  }
+                ]
+              },
+              options: {
+                title: {
+                  display: true,
+                  text: 'Device Energy Usage'
+                }
+              }
+        });
+    }
+function generateBarCharts() {
+    new Chart(document.getElementById("bar-price-chart"), {
+        type: 'bar',
+        data: {
+          labels: ['@Model.Device.Alias'],
+          datasets: [
+            {
+              label: "kr",
+              backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+              data: [barPrice/100]
+            }
+          ]
+        },
+        options: {
+          legend: { display: false },
+          title: {
+            display: true,
+            text: 'Device Energy cost in kr'
+          }
+        }
+    });
+    new Chart(document.getElementById("bar-energy-chart"), {
+        type: 'bar',
+        data: {
+          labels: ['@Model.Device.Alias'],
+          datasets: [
+            {
+              label: "kWh",
+              backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
+              data: [barEnergy]
+            }
+          ]
+        },
+        options: {
+          legend: { display: false },
+          title: {
+            display: true,
+            text: 'Total Device Energy Usage'
+          }
+        }
+    });
+}
+
+</script>

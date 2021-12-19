@@ -1,0 +1,44 @@
+﻿@model IEnumerable<CloudWebService.Models.SpotPrice>
+@{
+    ViewData["Title"] = "Spot Prices";
+}
+
+<h1>Prices</h1>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
+<div class="container-fluid lead">
+    <canvas id="line-chart" width="800" height="450"></canvas>
+</div>
+<script type="text/javascript">
+
+    var timestamps = [];
+    var prices = [];
+
+    @foreach (var item in Model)
+    {
+        <text>timestamps.push('@item.TimeStamp'); prices.push(parseFloat('@item.Price'.replace(/,/, '.')).toFixed(2));</text>
+    }
+
+    new Chart(document.getElementById("line-chart"), {
+      type: 'line',
+      data: {
+        labels: timestamps,
+        datasets: [{ 
+            data: prices,
+            label: "Ore/kWh",
+            borderColor: "#3e95cd",
+            fill: true
+          }
+        ]
+      },
+      options: {
+        title: {
+          display: true,
+          text: 'Spot Prices'
+        }
+      }
+    });
+
+</script>

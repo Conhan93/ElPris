@@ -1,0 +1,136 @@
+﻿@model IEnumerable<CloudWebService.Models.HomeChartData>
+
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">IoT Dashboard</h1>
+    <p>View energy prices and device data.</p>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
+<div class="container-fluid lead">
+    <div class="row">
+        <div class="col">
+          <canvas id="pie-chart" width="200" height="112"></canvas>
+        </div>
+        <div class="col">
+          <canvas id="line-chart" width="400" height="225" ></canvas>
+        </div>
+    </div>
+</div>
+<table class="table">
+   <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Adress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Alias)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+       @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Adress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Alias)
+            </td>
+            <td>
+                <a asp-action="SelectDevice" asp-route-adress="@item.Adress">View Device Data</a>
+            </td>
+        </tr>
+       }
+    </tbody>
+</table>
+
+
+<script type="text/javascript">
+    var dataArray = [];
+    var idArray = [];
+    var colourArray = []
+
+
+    processData();
+
+    generatePieChart();
+    generateLineChart();
+
+    function dynamicColors() {
+            var r = Math.floor(Math.random() * 255);
+            var g = Math.floor(Math.random() * 255);
+            var b = Math.floor(Math.random() * 255);
+            return "rgb(" + r + "," + g + "," + b + ")";
+         };
+
+    function processData() {
+            @foreach (var item in Model)
+            {
+                if (item.Alias.ToString().Length == 0)
+                {
+                    <text>idArray.push('@item.Adress');</text>
+                }
+                else
+                {
+                    <text>idArray.push('@item.Alias');</text>
+                }
+                <text>
+                      
+                    dataArray.push(parseFloat('@item.Price'.replace(/,/, '.')).toFixed(2));
+                    colourArray.push(dynamicColors());
+                </text>
+            }
+    }
+
+    function generatePieChart() {
+        new Chart(document.getElementById("pie-chart"), {
+              type: 'pie',
+              data: {
+                labels: idArray,
+                datasets: [{ 
+                    data: dataArray,
+                    label: "Öre/kWh",
+                    backgroundColor : colourArray,
+                    borderColor: "#3e95cd",
+                    fill: true
+                  }
+                ]
+              },
+              options: {
+                title: {
+                  display: true,
+                  text: 'total cost per device'
+                }
+              }
+        });
+    }
+
+    function generateLineChart() {
+         new Chart(document.getElementById("line-chart"), {
+              type: 'line',
+              data: {
+                labels: idArray,
+                datasets: [{ 
+                    data: dataArray,
+                    label: "Ore/kWh",
+                    borderColor: "#3e95cd",
+                    fill: true
+                  }
+                ]
+              },
+              options: {
+                title: {
+                  display: true,
+                  text: 'Spot Prices'
+                }
+              }
+        });
+    }
+    
+</script>

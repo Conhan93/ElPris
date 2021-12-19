@@ -1,0 +1,24 @@
+{
+  "dependencies": {
+    "mssql1": {
+      "restored": true,
+      "restoreTime": "2021-12-17T00:13:24.2470799Z"
+    },
+    "secrets1": {
+      "restored": true,
+      "restoreTime": "2021-12-17T00:13:19.5240779Z"
+    }
+  },
+  "parameters": {
+    "mssql1.subscriptionId": {
+      "Name": "mssql1.subscriptionId",
+      "Type": "subscription",
+      "Value": "7dfdeb1b-8c44-4ce5-864b-0cc5687cb048"
+    },
+    "mssql1.resourceGroupName": {
+      "Name": "mssql1.resourceGroupName",
+      "Type": "resourceGroup",
+      "Value": "cloudcourse"
+    }
+  }
+}
