@@ -74,7 +74,7 @@ async def main():
 
             await device_client.send_message(msg)
 
-            time.sleep(5)
+            time.sleep(60*60)
 
     else:
         print(
