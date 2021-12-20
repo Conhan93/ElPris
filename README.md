@@ -2,6 +2,20 @@
 
 ## Contents
 
+- ![About](https://github.com/Conhan93/ElPris#about)
+  - ![Use Case](https://github.com/Conhan93/ElPris#use-case)
+  - ![Constraints](https://github.com/Conhan93/ElPris#constraints)
+- ![System Architecture](https://github.com/Conhan93/ElPris#system-architecture)
+  - ![Device](https://github.com/Conhan93/ElPris#device)
+  - ![Functions](https://github.com/Conhan93/ElPris#functions)
+    - ![SaveMessage](https://github.com/Conhan93/ElPris#savemessage)
+    - ![SaveMessage](https://github.com/Conhan93/ElPris#getspotprices)
+  - ![Database](https://github.com/Conhan93/ElPris#getspotprices)
+  - ![WebApp](https://github.com/Conhan93/ElPris#webapp)
+    - ![Home](https://github.com/Conhan93/ElPris#web-app---home)
+    - ![Devices](https://github.com/Conhan93/ElPris#web-app---home)
+    - ![Prices](https://github.com/Conhan93/ElPris#web-app---prices)
+
 ## About
 ----
 
@@ -155,12 +169,12 @@ The web app itself is built on ASP .NET Core 6 with an MVC project template. The
 
 The Home page of the web app provides an overview of the connected devices and their data. Two charts to view the distribution of cost among the devices and a list of devices that'll provide more in detail information about the device and its data.
 
-![](Meta/Images/Home.png)
+![](https://github.com/Conhan93/ElPris/blob/main/Meta/Images/Home.PNG)
 
 Selecting a device to view brings up another page with charts visualizing device energy usage over time, total device energy usage and device energy cost.
 
 
-![](Meta/Images/Home_select2.png)
+![](https://github.com/Conhan93/ElPris/blob/main/Meta/Images/Home_select2.PNG)
 
 #### **Web App - Devices**
 
@@ -168,13 +182,13 @@ The device page lets the user view the available devices and modify them by assi
 
 The ability to put devices into groups was cut out due to time constraints.
 
-![](Meta/Images/Devices.png)
+![](https://github.com/Conhan93/ElPris/blob/main/Meta/Images/Devices.PNG)
 
 
 #### **Web App - Prices**
 
 The Price page provides a chart visualizing the latest spot prices over time. Plans are to change this page to provide information and visualization of plans and prices by different power providers in different areas.
 
-![](Meta/Images/Prices.png)
+![](https://github.com/Conhan93/ElPris/blob/main/Meta/Images/Prices.PNG)
 
 
