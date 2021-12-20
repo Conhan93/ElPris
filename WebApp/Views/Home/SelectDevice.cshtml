@@ -40,10 +40,16 @@ var barEnergy = 0.0;
 
 processData();
 
+console.log(timeArray);
+console.log(priceArray);
+console.log(barPrice);
+console.log(barEnergy);
+
 generateLineChart();
 generateBarCharts();
 
 function processData() {
+            //idArray.push('item.Alias' +' '+ 'item.Adress');
             @foreach (var item in Model.datas)
             {
 

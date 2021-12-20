@@ -35,7 +35,10 @@ namespace CloudWebService.Controllers
                 distinctItem.Price += item.Price;
             }
 
+            //var listData = new List<HomeChartData>();
+
             return View(distinct);
+            //return View();
         }
 
         public async Task<IActionResult> SelectDevice(string adress)
@@ -52,7 +55,7 @@ namespace CloudWebService.Controllers
             };
             var device = devicequery.Single();
             var deviceid = device.Id;
-
+            //var device = await _context.Devices.FindAsync();
             if (device == null)
             {
                 return NotFound();
@@ -70,6 +73,7 @@ namespace CloudWebService.Controllers
                         unit = p.Unit
                     };
 
+            //ar dataa = q.ToList<SelectDeviceData.data>();
             
             var data = new SelectDeviceData
             {

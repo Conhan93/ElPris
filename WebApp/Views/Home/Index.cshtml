@@ -52,12 +52,16 @@
 
 
 <script type="text/javascript">
+    // width="400" height="225"
     var dataArray = [];
     var idArray = [];
     var colourArray = []
 
 
     processData();
+
+    console.log(dataArray);
+    console.log(idArray);
 
     generatePieChart();
     generateLineChart();
@@ -70,6 +74,7 @@
          };
 
     function processData() {
+            //idArray.push('item.Alias' +' '+ 'item.Adress');
             @foreach (var item in Model)
             {
                 if (item.Alias.ToString().Length == 0)
